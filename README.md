@@ -8,7 +8,7 @@ Projekt påbörjat
 Som en första MVP ska jag skapa en minimalistisk användarvänlig one-page sida på engelska för mobil där användare upprepande gånger ska kunna skriva in en speltitel samt en spelbeskrivning, för att sedan få upp dessa i en tabell där även ordningsnummer och en bocka av/på knapp ska finnas. Användaren ska kunna ändra titel/beskrivning på varje tabellrad samt ta bort eller lägga till en rad. Det ska även gå att bocka för spelet som färdigspelat. 
 
 ### Feature expansion 
-Om tid finnes kommer jag först göra designen lite snyggare med bilder, ikoner, bakgrundsbilder och ett enhetligt färgschema. Sedan lägga till funktionerna: Användare ska kunna välja spel från en inlagd lista av spel där kategorier som spelkonsoll, spelgenre, metacritic rating och ordinarie pris också visas upp. Användare ska själv kunna lägga till dessa kategorier också. Listan ska kunna sparas i local-storage för använding ett senare tillfälle.
+Om tid finnes kommer jag först göra designen lite snyggare med bilder, ikoner, bakgrundsbilder och ett enhetligt färgschema samt göra desigen respoonsiv för användning på desktop och andra enheter. Sedan lägga till funktionerna: Användare ska kunna välja spel från en inlagd lista av spel där kategorier som spelkonsoll, spelgenre, metacritic rating och ordinarie pris också visas upp. Användare ska själv kunna lägga till dessa kategorier också. Listan ska kunna sparas i local-storage för använding ett senare tillfälle.
 
 ## Plan
 1. Skapa ER-Diagram i figma
@@ -21,6 +21,13 @@ Om tid finnes kommer jag först göra designen lite snyggare med bilder, ikoner,
 8. Koppla ihop vyerna med sin backend
 9. Finslipa HTML struktur och design i CSS
 10. Testa sin applikation.
+
+## Utförande
+
+### ER-Diagram
+![erDiagram](https://github.com/user-attachments/assets/d8938140-2e8a-40de-b6a1-278c0a1ccb49)
+<br>
+En tabell kommer behövas då enbart användarens input av titel och beskrivning kommer att läggas in i databasen tillsammans med ID och klar/icke-klar kolumnerna. ID kommer vara ett nummer som automatiskt ökar för varje tabellrad och behöver därför vara INT och auto_increment. Jag har satt denna som primary key för att unikt kunna identifiera varje tabellrad. Title ska vara en sträng med ett spelnamn som användaren skriver in, har satt VARCHAR till 80 för att begränsa antalet tecken i kolumnen då flesta speltitlar har 20-40 tecken och NOT NULL för att ett definierat värde ska finnas i kolumnen. Description ska vara en sträng med spelbeskrivning, VARCHAR(255) för att besgränsa antalet tecken och få en kort beskrivning av spelet. is_completed ska vara en klar/icke-klar ruta som representeras genom ett TRUE/FALSE värde och ska därför vara BOOLEAN med ett DEFAULT värde av FALSE där anävndaren själv bockar av spelet som spelat och gör det till TRUE.
 
 ---
 
