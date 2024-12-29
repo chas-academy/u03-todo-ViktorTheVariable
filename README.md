@@ -26,8 +26,14 @@ Om tid finnes kommer jag först göra designen lite snyggare med bilder, ikoner,
 
 ### ER-Diagram
 ![erDiagram](https://github.com/user-attachments/assets/d8938140-2e8a-40de-b6a1-278c0a1ccb49)
+[Länk till ER-Diagram](https://www.figma.com/design/oGqJhH8jCxsHc1e2w2Qg6W/U03-ERDiagram-FigmaSkiss?node-id=0-1&p=f&t=LLaNUQibLpP9yzGb-0)
 <br>
 En tabell kommer behövas då enbart användarens input av titel och beskrivning kommer att läggas in i databasen tillsammans med ID och klar/icke-klar kolumnerna. ID kommer vara ett nummer som automatiskt ökar för varje tabellrad och behöver därför vara INT och auto_increment. Jag har satt denna som primary key för att unikt kunna identifiera varje tabellrad. Title ska vara en sträng med ett spelnamn som användaren skriver in, har satt VARCHAR till 80 för att begränsa antalet tecken i kolumnen då flesta speltitlar har 20-40 tecken och NOT NULL för att ett definierat värde ska finnas i kolumnen. Description ska vara en sträng med spelbeskrivning, VARCHAR(255) för att besgränsa antalet tecken och få en kort beskrivning av spelet. is_completed ska vara en klar/icke-klar ruta som representeras genom ett TRUE/FALSE värde och ska därför vara BOOLEAN med ett DEFAULT värde av FALSE där anävndaren själv bockar av spelet som spelat och gör det till TRUE.
+
+### Figma-Skiss
+![Skärmbild 2024-12-29 054915](https://github.com/user-attachments/assets/aa178b8e-0741-44a2-85c6-a54b9a79ebf0)
+[Länk till figma-skiss](https://www.figma.com/design/oGqJhH8jCxsHc1e2w2Qg6W/U03-ERDiagram-FigmaSkiss?node-id=0-1&p=f&t=LLaNUQibLpP9yzGb-0)
+
 
 ---
 
