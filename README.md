@@ -34,7 +34,14 @@ En tabell kommer behövas då enbart användarens input av titel och beskrivning
 ![Skärmbild 2024-12-29 054915](https://github.com/user-attachments/assets/aa178b8e-0741-44a2-85c6-a54b9a79ebf0)
 [Länk till figma-skiss](https://www.figma.com/design/oGqJhH8jCxsHc1e2w2Qg6W/U03-ERDiagram-FigmaSkiss?node-id=0-1&p=f&t=LLaNUQibLpP9yzGb-0)
 
+### Filstruktur
+Filstruktur skapad i VsCode med filerna: Dockerfile, docker-compose.yml, index.php, db.php, sql-seed.sql, style.css, index.php. Även bilden som ska användas, figmas-skissen och ER-diagrammet lades in i assets mappen.
 
+### Container med MariaDB
+En container skapades med databasen U03-todo. En tabell videoGames enligt ER-Diagrmmet skapades också via sql-seed.sql filen när containern skpades.
+
+### Skapa en databas och koppla den till PDO
+En tabell videoGames enligt ER-Diagrmmet skapades via sql-seed.sql filen när containern skpades. Databasen kopplades sedan ihop med PDO i db.php filen.
 ---
 
 Viktor Ekström

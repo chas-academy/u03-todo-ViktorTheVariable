@@ -1,0 +1,6 @@
+CREATE TABLE videoGames (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(80) NOT NULL,
+    description VARCHAR(255) NOT NULL,
+    is_completed BOOLEAN DEFAULT FALSE
+);
