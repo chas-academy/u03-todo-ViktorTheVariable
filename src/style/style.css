@@ -1,0 +1,28 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.flex {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+img {
+    width: 20%;
+    height: 70px; /* Justera detta värde efter behov */
+    object-fit: cover;
+    object-position: center; /* Centrerar bilden vertikalt */
+}
+
+.input {
+    margin-bottom: 2rem;
+}
+
+#show-lists {
+    width: 12rem;
+}
