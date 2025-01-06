@@ -1,6 +1,7 @@
 <?php
 
 require_once 'db.php';
+require_once 'crud-functions.php';
 
 ?>
 
@@ -21,16 +22,19 @@ require_once 'db.php';
         </header>
         <main id="main" class="flex">
             <h2>Create a list of games</h2>
-            <form action="" method="post" class="flex">
+            <form method="post" class="flex">
                 <label for="username" class="label">Type in your username:</label>
-                <input type="text" name="username" id="username" class="input"></label>
+                <input type="text" name="username" id="username" class="input" required></label>
                 <label for="title" class="label">Type in the title of the game:</label>
-                <input type="text" name="title" id="title" class="input"></label>
+                <input type="text" name="title" id="title" class="input" required></label>
                 <label for="description" class="label">Type in a short description of the game:</label>
-                <input type="text" name="description" id="description" class="input"></label>
-                <input type="submit" value="Create game-task!" class="input">
+                <input type="text" name="description" id="description" class="input" required></label>
+                <input type="submit" value="Add a game to a list" class="input">
             </form>
-            <button type="button" id="show-lists" class="flex input">Show a list of your game tasks</button>
+            <?php if ($message): ?>
+                <p class="input"><?php echo htmlspecialchars($message); ?></p>
+            <?php endif; ?>
+            <button type="button" class="input">Show your list of games!</button>
             <table class="flex">
 
             </table>
