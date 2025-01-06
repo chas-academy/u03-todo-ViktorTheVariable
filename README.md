@@ -43,6 +43,9 @@ En container skapades med databasen U03-todo. En tabell videoGames enligt ER-Dia
 ### Skapa en databas och koppla den till PDO
 tre tabeller enligt ER-Diagrmmet skapades via sql-seed.sql filen när containern skpades. Databasen kopplades sedan ihop med PDO i db.php filen.
 
+### Skapa PHP-vyer med grundläggande HTML och css
+html strukturen och css styling skapad för att se ut någolunda som figma skissen. Nu kan jag bygga crud functionerna och testa dem på sidan.
+
 ---
 
 Viktor Ekström
