@@ -25,7 +25,16 @@ function addGame($conn, $userId, $title, $description) {
     }
 }
 
+function getGames($pdo, $userId) {
+    $stmt = $pdo->prepare("SELECT * FROM videoGames WHERE userID = ? ORDER BY gameID");
+    $stmt->execute([$userId]);
+    return $stmt->fetchAll();
+}
+
 $message = '';
+
+$showList = false; // Variabel som kontrollerar om tabellen ska visas
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['add_game'])) {
@@ -36,9 +45,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $message = 'Game added successfully';
         }
     }
+    elseif (isset($_POST['show_list'])) {
+        // visar tabellen
+        $showList = true;
+    }
 }
 
 
-
+$currentUsername = isset($_POST['username']) ? $_POST['username'] : '';
+$userId = ($currentUsername) ? getUserId($conn, $currentUsername) : 0;
+$games = ($userId && !$showList) ? [] : ($userId ? getGames($conn, $userId) : []);
 
 ?>

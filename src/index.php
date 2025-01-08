@@ -26,18 +26,59 @@ require_once 'crud-functions.php';
                 <label for="username" class="label">Type in your username:</label>
                 <input type="text" name="username" id="username" class="input" required>
                 <label for="title" class="label">Type in the title of the game:</label>
-                <input type="text" name="title" id="title" class="input" required>
+                <input type="text" name="title" id="title" class="input">
                 <label for="description" class="label">Type in a short description of the game:</label>
-                <textarea type="text" name="description" id="description" class="input" required></textarea>
+                <textarea type="text" name="description" id="description" class="input"></textarea>
                 <input type="submit" value="Add a game to a list" class="input" name="add_game">
             </form>
             <?php if ($message): ?>
                 <p class="input"><?php echo htmlspecialchars($message); ?></p>
             <?php endif; ?>
             <button type="button" class="input">Show your list of games!</button>
-            <table class="flex">
-
-            </table>
+            <?php if ($showList): ?>
+                <table class="flex">
+                    <caption>My list of games</caption>
+                    <?php if (!empty($games)): ?>
+                        <?php foreach ($games as $index => $game): ?>
+                        <tr>
+                            <th>Order of play:</th>
+                            <td><?php echo htmlspecialchars($index + 1); ?></td>
+                        </tr>
+                        <tr>
+                            <th>Game title:</th>
+                            <td><?php echo htmlspecialchars($game['title']); ?></td>
+                        </tr>
+                        <tr>
+                            <th>Game description:</th>
+                            <td><?php echo htmlspecialchars($game['description']); ?></td>
+                        </tr>
+                        <tr>
+                            <th>Game finished?:</th>
+                            <td>
+                                <form method="post" style='display:inline;'>
+                                    <input type='checkbox'name='is_completed'>
+                                </form>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                            <form method="post" style="display: inline;">
+                                <input type="submit" name="delete_game" value="Delete">
+                            </form>
+                            </td>
+                            <td>
+                            <form method="post" style="display: inline;">
+                                <input type="submit" name="update_game" value="Update">
+                            </form>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
+                        <?php else: ?>
+            <!-- Message when there are no games -->
+            <tr><td colspan="5">No games found.</td></tr>
+        <?php endif; ?>
+    </table>
+<?php endif; ?>
         </main>
         <footer id="footer" class="flex">
             <p>Copyright &copy; Viktor Ekström</p>
