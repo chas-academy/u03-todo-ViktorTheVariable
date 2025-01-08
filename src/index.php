@@ -1,10 +1,7 @@
 <?php
 
-
+require_once 'db.php';
 require_once 'crud-functions.php';
-
-// Hämta användarnamn från sessionen
-$username = getUsernameFromSession();
 
 ?>
 
@@ -34,23 +31,13 @@ $username = getUsernameFromSession();
                 <textarea type="text" name="description" id="description" class="input" required></textarea>
                 <input type="submit" value="Add a game to a list" class="input">
             </form>
-
             <?php if ($message): ?>
                 <p class="input"><?php echo htmlspecialchars($message); ?></p>
             <?php endif; ?>
+            <button type="button" class="input">Show your list of games!</button>
+            <table class="flex">
 
-            <!-- Formulär för att visa spellistan -->
-            <form method="post">
-                <input type="hidden" name="username" value="<?php echo htmlspecialchars($username); ?>">
-                <input type="submit" name="showGames" value="Show your list of games!" class="input">
-            </form>
-
-            <?php if ($tableHtml): ?>
-                <div id="gameTableContainer">
-                    <?php echo $tableHtml; ?>
-                </div>
-            <?php endif; ?>
-
+            </table>
         </main>
         <footer id="footer" class="flex">
             <p>Copyright &copy; Viktor Ekström</p>
