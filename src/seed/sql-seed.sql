@@ -1,6 +1,6 @@
 CREATE TABLE users (
     userID INT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(60) NOT NULL UNIQUE
+    username VARCHAR(40) NOT NULL UNIQUE
 );
 
 CREATE TABLE videoGames (
@@ -9,5 +9,6 @@ CREATE TABLE videoGames (
     description VARCHAR(255),
     is_completed BOOLEAN DEFAULT FALSE,
     userID INT NOT NULL,
-    FOREIGN KEY (userID) REFERENCES lists(userID)
+    FOREIGN KEY (userID) REFERENCES users(userID)
 );
+

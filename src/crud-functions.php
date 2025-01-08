@@ -4,10 +4,10 @@
 require_once 'db.php';
 
 function getUserId($conn, $username) {
+    // Hämtar användarens ID från databasen, eller skapar en ny användare om den inte finns
     $stmt = $conn->prepare("SELECT userID FROM users WHERE username = ?");
     $stmt->execute([$username]);
     $user = $stmt->fetch();
-
     if ($user) {
         return $user['userID'];
     } else {
@@ -33,6 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (!empty($_POST['username']) && !empty($_POST['title']) && !empty($_POST['description'])) {
             $userId = getUserId($conn, $_POST['username']);
             addGame($conn, $userId, $_POST['title'], $_POST['description']);
+            $message = 'Game added successfully';
         }
     }
 }

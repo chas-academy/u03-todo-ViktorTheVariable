@@ -29,7 +29,7 @@ require_once 'crud-functions.php';
                 <input type="text" name="title" id="title" class="input" required>
                 <label for="description" class="label">Type in a short description of the game:</label>
                 <textarea type="text" name="description" id="description" class="input" required></textarea>
-                <input type="submit" value="Add a game to a list" class="input">
+                <input type="submit" value="Add a game to a list" class="input" name="add_game">
             </form>
             <?php if ($message): ?>
                 <p class="input"><?php echo htmlspecialchars($message); ?></p>
