@@ -23,18 +23,19 @@ require_once 'crud-functions.php';
         <main id="main" class="flex">
             <h2>Create a list of games</h2>
             <form method="post" class="flex">
-                <label for="username" class="label">Type in your username:</label>
-                <input type="text" name="username" id="username" class="input" required>
-                <label for="title" class="label">Type in the title of the game:</label>
-                <input type="text" name="title" id="title" class="input">
-                <label for="description" class="label">Type in a short description of the game:</label>
-                <textarea type="text" name="description" id="description" class="input"></textarea>
-                <input type="submit" value="Add a game to a list" class="input" name="add_game">
-            </form>
+            <label for="username" class="label">Type in your username:</label>
+            <input type="text" name="username" id="username" class="input" required value="<?php echo htmlspecialchars($currentUsername); ?>">
+            <label for="title" class="label">Type in the title of the game:</label>
+            <input type="text" name="title" id="title" class="input">
+            <label for="description" class="label">Type in a short description of the game:</label>
+            <input type="text" name="description" id="description">
+            <input type="submit" name="add_game" value="Add a game to a list" class="input">
+            <input type='hidden' name='show_list' value='1'>
+            <input type='submit' value='Show your list of games!' class='input'>
+        </form>
             <?php if ($message): ?>
                 <p class="input"><?php echo htmlspecialchars($message); ?></p>
             <?php endif; ?>
-            <button type="button" class="input">Show your list of games!</button>
             <?php if ($showList): ?>
                 <table class="flex">
                     <caption>My list of games</caption>
