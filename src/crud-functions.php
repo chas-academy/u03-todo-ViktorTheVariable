@@ -31,11 +31,19 @@ function getGames($pdo, $userId) {
     return $stmt->fetchAll();
 }
 
-function toggleCheckbox($conn, $gameId, $isCompleted) {
-    // Uppdaterar is_completed i databasen
-    $stmt = $conn->prepare("UPDATE videoGames SET is_completed = ? WHERE gameID = ?");
-    $stmt->execute([$isCompleted, $gameId]);
-}
+
+function updateGame($pdo, $gameId, $title, $description, $isCompleted) {
+    if ($title !== null && $description !== null) {
+        // Om title och description inte är null, uppdatera dem
+        $stmt = $pdo->prepare("UPDATE videoGames SET title = ?, description = ?, is_completed = ? WHERE gameID = ?");
+        $stmt->execute([$title, $description, $isCompleted, $gameId]);
+    } else {
+        // Om title eller description inte finns, uppdatera bara is_completed
+        $stmt = $pdo->prepare("UPDATE videoGames SET is_completed = ? WHERE gameID = ?");
+        $stmt->execute([$isCompleted, $gameId]);
+    }
+} 
+
 
 $message = '';
 
@@ -44,23 +52,26 @@ $showList = false; // Variabel som kontrollerar om tabellen ska visas
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['add_game'])) {
-        // Lägger till ett nytt spel
+        // Lägger till spel
         if (!empty($_POST['username']) && !empty($_POST['title']) && !empty($_POST['description'])) {
             $userId = getUserId($conn, $_POST['username']);
             addGame($conn, $userId, $_POST['title'], $_POST['description']);
             $message = 'Game added successfully';
         }
     }
-    elseif (isset($_POST['show_list'])) {
-        // visar tabellen
-        $showList = true;
-    }
-    elseif (isset($_POST['toggle_completion'])) {
-        // körr funktionen toggleCheckbox som uppdaterar is_completed
+        elseif (isset($_POST['toggle_completion'])) {
+        // Ändra spelstatus
         $isCompleted = isset($_POST['is_completed']) ? 1 : 0;
-        toggleCheckbox($conn, $_POST['game_id'], $isCompleted);
-        $showList = true;
-}
+        updateGame($conn, $_POST['game_id'], null, null, $isCompleted);
+        $showList = true; // visa tabellen efter uppdatering
+        }    
+        elseif (isset($_POST['update_game'])) {
+        // Uppdatera spel
+        updateGame($conn, $_POST['game_id'], $_POST['title'], $_POST['description'], isset($_POST['is_completed']) ? 1 : 0);
+        $showList = true; // visa tabellen efter uppdatering
+    }   elseif (isset($_POST['show_list'])) {
+        $showList = true; // visa tabellen
+    }
 }
 
 
@@ -69,3 +80,4 @@ $userId = ($currentUsername) ? getUserId($conn, $currentUsername) : 0;
 $games = ($userId && !$showList) ? [] : ($userId ? getGames($conn, $userId) : []);
 
 ?>
+

@@ -15,7 +15,15 @@ require_once 'crud-functions.php';
     <meta name="keywords" content="U03-todo, MariaDB, PDO, Videogames">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="style/style.css">
+    <link type="text/css" rel="stylesheet" href="style/style.css">
+    <style>
+        input[type="checkbox"]:checked + label + div {
+        display: block;
+        }
+        div.update-form {
+            display: none;
+        }
+    </style>
 </head>
 <body>
     <div id="container">
@@ -70,15 +78,29 @@ require_once 'crud-functions.php';
                             </td>
                         </tr>
                         <tr>
-                            <td>
-                            <form method="post" style="display: inline;">
-                                <input type="submit" name="delete_game" value="Delete">
-                            </form>
+                            <td colspan="2">
+                                <input type="checkbox" id="toggle-update-form-<?php echo htmlspecialchars($game["gameID"]); ?>" style="display:none;">
+                                <label for="toggle-update-form-<?php echo htmlspecialchars($game["gameID"]); ?>" style="cursor:pointer;">Update</label>
+                                
+                                <!-- Update Form -->
+                                <div class="update-form" id='update-form-<?php echo htmlspecialchars($game["gameID"]); ?>'>
+                                    <form method='post'>
+                                        <input type='hidden' name='username' value='<?php echo htmlspecialchars($currentUsername); ?>'>
+                                        <input type='hidden' name='game_id' value='<?php echo htmlspecialchars($game["gameID"]); ?>'>
+                                        <label for='new_title'>New Title:</label><br>
+                                        <input type='text' name='title' required><br>
+                                        <label for='new_description'>New Description:</label><br>
+                                        <input type='text' name='description' required><br>
+                                        <input type='submit' name='update_game' value='Update Game'>
+                                    </form>
+                                </div>
                             </td>
+                        </tr>
+                        <tr>
                             <td>
-                            <form method="post" style="display: inline;">
-                                <input type="submit" name="update_game" value="Update">
-                            </form>
+                                <form method="post" style="display: inline;">
+                                    <input type="submit" value="Delete">
+                                </form>
                             </td>
                         </tr>
                         <?php endforeach; ?>
