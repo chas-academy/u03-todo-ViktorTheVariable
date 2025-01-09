@@ -60,9 +60,13 @@ require_once 'crud-functions.php';
                         <tr>
                             <th>Game finished?:</th>
                             <td>
-                                <form method="post" style='display:inline;'>
-                                    <input type='checkbox'name='is_completed'>
-                                </form>
+                            <form method="post" style='display:inline;'>
+                                <input type='hidden' name='username' value='<?php echo htmlspecialchars($currentUsername); ?>'>
+                                <input type='hidden' name='game_id' value='<?php echo htmlspecialchars($game["gameID"]); ?>'>
+                                <input type='hidden' name='toggle_completion'>
+                                <input type='checkbox' name='is_completed' <?php echo ($game['is_completed']) ? 'checked' : ''; ?>>
+                                <input type='submit' value='Save'>
+                            </form>
                             </td>
                         </tr>
                         <tr>
@@ -78,8 +82,7 @@ require_once 'crud-functions.php';
                             </td>
                         </tr>
                         <?php endforeach; ?>
-                        <?php else: ?>
-                        <!-- Message when there are no games -->
+                    <?php else: ?>
                         <tr><td colspan="5">No games found.</td></tr>
                     <?php endif; ?>
                 </table>

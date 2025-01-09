@@ -31,6 +31,12 @@ function getGames($pdo, $userId) {
     return $stmt->fetchAll();
 }
 
+function toggleCheckbox($conn, $gameId, $isCompleted) {
+    // Uppdaterar is_completed i databasen
+    $stmt = $conn->prepare("UPDATE videoGames SET is_completed = ? WHERE gameID = ?");
+    $stmt->execute([$isCompleted, $gameId]);
+}
+
 $message = '';
 
 $showList = false; // Variabel som kontrollerar om tabellen ska visas
@@ -49,6 +55,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // visar tabellen
         $showList = true;
     }
+    elseif (isset($_POST['toggle_completion'])) {
+        // körr funktionen toggleCheckbox som uppdaterar is_completed
+        $isCompleted = isset($_POST['is_completed']) ? 1 : 0;
+        toggleCheckbox($conn, $_POST['game_id'], $isCompleted);
+        $showList = true;
+}
 }
 
 
