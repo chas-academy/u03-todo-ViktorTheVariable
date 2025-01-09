@@ -9,6 +9,10 @@ require_once 'crud-functions.php';
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="author" content="Viktor Ekström">
+    <meta name="description" content="U03-todo">
+    <meta name="keywords" content="U03-todo, MariaDB, PDO, Videogames">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style/style.css">
@@ -75,11 +79,11 @@ require_once 'crud-functions.php';
                         </tr>
                         <?php endforeach; ?>
                         <?php else: ?>
-            <!-- Message when there are no games -->
-            <tr><td colspan="5">No games found.</td></tr>
-        <?php endif; ?>
-    </table>
-<?php endif; ?>
+                        <!-- Message when there are no games -->
+                        <tr><td colspan="5">No games found.</td></tr>
+                    <?php endif; ?>
+                </table>
+            <?php endif; ?>
         </main>
         <footer id="footer" class="flex">
             <p>Copyright &copy; Viktor Ekström</p>
