@@ -46,6 +46,15 @@ tre tabeller enligt ER-Diagrmmet skapades via sql-seed.sql filen när containern
 ### Skapa PHP-vyer med grundläggande HTML och css
 html strukturen och css styling skapad för att se ut någolunda som figma skissen. Nu kan jag bygga crud functionerna och testa dem på sidan.
 
+### Bygga mina SQL-Frågor med PDO
+
+1. jag började med att skapa en funktion för att antingen hämta användarID från databasen om den redan finns eller skapa ett nytt användarID om det som användaren ska skriva in inte finns i databasen. Sedan skapade jag logiken för att köra denna funktion.
+2. Jag skapade en funktion för att lägga till ett spel (och för tillfället annan text) som via användarens inmatning i det title och description inputfälten tillsammans med användarID:t lägger till inputs från de båda i respektive kolumn i databasen. Logik skapades för att köra funktionen och formulär i index.php modifierades för att passa ihop med logiken och köra funktionen med en knapptryckning.
+3. Jag skapade en funktion för att hämta all data från databasen som tillhär en visst användarId och logiken för denna som  sedan via en knapptryckning repreneteras i en tabell som jag också skapade i index.php.
+4. Jag skapade en funktion för att toggla en checkbox som iffyld lägger in true och inte ifylld lägger in false i databasen som representeras på sidan genom en användares input som sedan updateras och sparas via en knapp.
+5. Skapade sedan en funktion för att uppdatera en spel med ny titel och beskrivning och logik för att köra den. I index.php lade jag till ett hidden formulär som visas via en knapptryckning. Jag la även till en variabel $showlist i logiken med värdet false för att i index.php sätta värdet till true via en vilkorsats om knappen för att visa listan trycks på av användaren.
+6. Sist la jag till en funktion för att radera ett spel från listan och spara denna radering i databasen. logik skapades för funktionen och ett modifierat formulär i index.php skapades också för att radera spelet via användares input.
+
 ---
 
 Viktor Ekström
