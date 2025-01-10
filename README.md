@@ -48,12 +48,27 @@ html strukturen och css styling skapad för att se ut någolunda som figma skiss
 
 ### Bygga mina SQL-Frågor med PDO
 
-1. jag började med att skapa en funktion för att antingen hämta användarID från databasen om den redan finns eller skapa ett nytt användarID om det som användaren ska skriva in inte finns i databasen. Sedan skapade jag logiken för att köra denna funktion.
-2. Jag skapade en funktion för att lägga till ett spel (och för tillfället annan text) som via användarens inmatning i det title och description inputfälten tillsammans med användarID:t lägger till inputs från de båda i respektive kolumn i databasen. Logik skapades för att köra funktionen och formulär i index.php modifierades för att passa ihop med logiken och köra funktionen med en knapptryckning.
-3. Jag skapade en funktion för att hämta all data från databasen som tillhär en visst användarId och logiken för denna som  sedan via en knapptryckning repreneteras i en tabell som jag också skapade i index.php.
-4. Jag skapade en funktion för att toggla en checkbox som iffyld lägger in true och inte ifylld lägger in false i databasen som representeras på sidan genom en användares input som sedan updateras och sparas via en knapp.
-5. Skapade sedan en funktion för att uppdatera en spel med ny titel och beskrivning och logik för att köra den. I index.php lade jag till ett hidden formulär som visas via en knapptryckning. Jag la även till en variabel $showlist i logiken med värdet false för att i index.php sätta värdet till true via en vilkorsats om knappen för att visa listan trycks på av användaren.
+1. jag började med att skapa en funktion getUserId som förbreder sql-frågorna SELECT och INSERT med prepared/execute statement för att antingen hämta användarID från databasen om den redan finns eller skapa ett nytt användarID om det som användaren ska skriva in inte finns i databasen.
+2. Jag skapade en funktion addGame för att lägga till ett spelet titel och beskrivning (och för tillfället annan text) i databasen via sql-frågan INSERT och prepared/execute statement om båda formulär fälten är ifyllda. som via användarens inmatning i title och description inputfälten tillsammans med användarID:t lägger till inputs från de båda i respektive kolumn i databasen. Logik skapades för att köra funktionen och formulär i index.php modifierades för att passa ihop med logiken och köra funktionen med en knapptryckning.
+3. Jag skapade en funktion getGames för att hämta all data från databasen som tillhör en visst användarId genom sql-frågan SELECT och prepared/execute statement.
+4. Jag skapade en funktion toggleCheckbox för att toggla en checkbox som iffyld ska lägga in true och inte ifylld lägga in false i databasen.
+5. Skapade sedan en funktion updateGame för att uppdatera en spel med ny titel och beskrivning via sql-frågan UPDATE och prepared/execute statement. och logik för att köra den. I index.php lade jag till ett hidden formulär som visas via en knapptryckning. 
 6. Sist la jag till en funktion för att radera ett spel från listan och spara denna radering i databasen. logik skapades för funktionen och ett modifierat formulär i index.php skapades också för att radera spelet via användares input.
+
+### Koppla ihop vyerna med sin backend
+
+1. Jag skapade logiken för funktionen getUserId med hjälp av en nästlad if-sats som säger att när en POST-request har skickats (som sedan kommer kunna användas av andra funktioner) och knappen för formuläret add_game trycks på skickar en POST-request och slutligen om title och description formulären inte är tomma så körs addGame funktionen och lägger till ett spel i databasen och genererar ett meddelande om att det lyckades annars ett meddelande att det inte lyckats. 
+
+2. Logiken till addGame tar användarens inmatning i title och description inputfält tillsammans med användarID:t och lägger till inputs från de båda i respektive kolumn i databasen. Logik skapades för att köra funktionen och formulär i index.php modifierades för att passa ihop med logiken och köra funktionen med en knapptryckning.
+
+3.  Jag skapade logiken för getGames genom en variabel $showlist med värdet false för att i index.php sätta värdet till true via en vilkorsats om knappen för att visa listan trycks på av användaren. När knapptryckning sker repreneteras datan från databasen genom en tabell som skapas med hjälp av en foreach-loop där varje objekt i arrayen innehållande alla rader i databasen för den userID genereras på sidan.
+
+4. Logiken för toggleCheckbox kollar om knappen för checkboxen is_completed skickar en POST-request och kollar om användaren fyllt i checkbox, om ja så sätts is_complete i databasen till true annars false och denna status sparas och med hjälp av logik i formuläret i index.php visar rätt status i checkboxen. $showlist sätts också till true för att visa tabellen med data efter uppdateringen.
+
+5. Logik skapades för updateGame och kollar om knappen för formuläret update_game skickar en POST-request genom att användaren klickar på update knappen som skapats i ett formulär. Om ja så körs funktionen och is_completed uppdateras samt $showlist sätts till true för att visa tabellen med data efter uppdateringen. Formuläret som skapas är ett hidden formulär som visas och göms via en knapptryckning.
+
+6. logik skapades för deleteGame genom att kolla om knappen för formuläret delete_game skickar en POST-request och ett modifierat formulär i index.php skapades också för att radera spelet via användares input.
+
 
 ---
 
