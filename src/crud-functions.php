@@ -42,7 +42,12 @@ function updateGame($pdo, $gameId, $title, $description, $isCompleted) {
         $stmt = $pdo->prepare("UPDATE videoGames SET is_completed = ? WHERE gameID = ?");
         $stmt->execute([$isCompleted, $gameId]);
     }
-} 
+}
+
+function deleteGame($conn, $gameId) {
+    $stmt = $conn->prepare("DELETE FROM videoGames WHERE gameID = ?");
+    $stmt->execute([$gameId]);
+}
 
 
 $message = '';
@@ -69,7 +74,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Uppdatera spel
         updateGame($conn, $_POST['game_id'], $_POST['title'], $_POST['description'], isset($_POST['is_completed']) ? 1 : 0);
         $showList = true; // visa tabellen efter uppdatering
-    }   elseif (isset($_POST['show_list'])) {
+    }   elseif (isset($_POST['delete_game'])) {
+        // Radera spel
+        deleteGame($conn, $_POST['game_id']);
+        $showList = true; // visa tabellen efter radering
+    }
+        elseif (isset($_POST['show_list'])) {
         $showList = true; // visa tabellen
     }
 }
@@ -80,4 +90,3 @@ $userId = ($currentUsername) ? getUserId($conn, $currentUsername) : 0;
 $games = ($userId && !$showList) ? [] : ($userId ? getGames($conn, $userId) : []);
 
 ?>
-

@@ -42,12 +42,12 @@ require_once 'crud-functions.php';
             <label for="description" class="label">Type in a short description of the game:</label>
             <input type="text" name="description" id="description">
             <input type="submit" name="add_game" value="Add a game to a list" class="input">
-            <input type='hidden' name='show_list' value='1'>
-            <input type='submit' value='Show your list of games!' class='input'>
-        </form>
             <?php if ($message): ?>
                 <p class="input"><?php echo htmlspecialchars($message); ?></p>
             <?php endif; ?>
+            <input type='hidden' name='show_list' value='1'>
+            <input type='submit' value='Show your list of games!' class='input'>
+        </form>
             <?php if ($showList): ?>
                 <table class="flex">
                     <caption>My list of games</caption>
@@ -98,14 +98,18 @@ require_once 'crud-functions.php';
                         </tr>
                         <tr>
                             <td>
-                                <form method="post" style="display: inline;">
-                                    <input type="submit" value="Delete">
-                                </form>
+                            <form method="post" style="display: inline;">
+                                <input type="hidden" name="username" value="<?php echo htmlspecialchars($currentUsername); ?>">
+                                <input type="hidden" name="game_id" value="<?php echo htmlspecialchars($game['gameID']); ?>">
+                                <input type="submit" name="delete_game" value="Delete">
+                            </form>
                             </td>
+                        </tr>
+                            <td colspan="2"><hr></td>
                         </tr>
                         <?php endforeach; ?>
                     <?php else: ?>
-                        <tr><td colspan="5">No games found.</td></tr>
+                        <tr><td colspan="2">Add a new game to your list.</td></tr>
                     <?php endif; ?>
                 </table>
             <?php endif; ?>
