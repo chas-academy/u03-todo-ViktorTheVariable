@@ -45,6 +45,7 @@ function updateGame($pdo, $gameId, $title, $description, $isCompleted) {
 }
 
 function deleteGame($conn, $gameId) {
+    // Radera spel
     $stmt = $conn->prepare("DELETE FROM videoGames WHERE gameID = ?");
     $stmt->execute([$gameId]);
 }
@@ -63,24 +64,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             addGame($conn, $userId, $_POST['title'], $_POST['description']);
             $message = 'Game added successfully';
         }
+        else {
+            $message = 'Please fill in both title and description fields';
+        }
     }
-        elseif (isset($_POST['toggle_completion'])) {
-        // Ändra spelstatus
-        $isCompleted = isset($_POST['is_completed']) ? 1 : 0;
-        updateGame($conn, $_POST['game_id'], null, null, $isCompleted);
-        $showList = true; // visa tabellen efter uppdatering
-        }    
-        elseif (isset($_POST['update_game'])) {
-        // Uppdatera spel
-        updateGame($conn, $_POST['game_id'], $_POST['title'], $_POST['description'], isset($_POST['is_completed']) ? 1 : 0);
-        $showList = true; // visa tabellen efter uppdatering
-    }   elseif (isset($_POST['delete_game'])) {
-        // Radera spel
-        deleteGame($conn, $_POST['game_id']);
-        $showList = true; // visa tabellen efter radering
+    elseif (isset($_POST['toggle_completion'])) {
+    // Ändra spelstatus
+    $isCompleted = isset($_POST['is_completed']) ? 1 : 0;
+    updateGame($conn, $_POST['game_id'], null, null, $isCompleted);
+    $showList = true; // visa tabellen efter uppdatering
+    }    
+    elseif (isset($_POST['update_game'])) {
+    // Uppdatera spel
+    updateGame($conn, $_POST['game_id'], $_POST['title'], $_POST['description'], isset($_POST['is_completed']) ? 1 : 0);
+    $showList = true; // visa tabellen efter uppdatering
+    }   
+    elseif (isset($_POST['delete_game'])) {
+    // Radera spel
+    deleteGame($conn, $_POST['game_id']);
+    $showList = true; // visa tabellen efter radering
     }
-        elseif (isset($_POST['show_list'])) {
-        $showList = true; // visa tabellen
+    elseif (isset($_POST['show_list'])) {
+    $showList = true; // visa tabellen
     }
 }
 
