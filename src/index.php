@@ -30,9 +30,9 @@ require_once 'crud-functions.php';
                 <label for="username" class="label">Type in your username:</label>
                 <input type="text" name="username" id="username" class="input" required maxlength="40" value="<?php echo htmlspecialchars($currentUsername); ?>">
                 <label for="title" class="label">Type in the title of the game:</label>
-                <input type="text" name="title" id="title" class="input" maxlength="80">
-                <label for="description" class="label">Type in a short description of the game:</label>
-                <textarea rows="4" cols="30" name="description" id="description" class="description" maxlength="255"></textarea>
+                <input type="text" name="title" id="title" class="input" maxlength="80" pattern="(?!.*\s\s)([^\s]{1,30})(\s[^\s]{1,20})*">
+                <label for="description" class="label">Type in a game description:</label>
+                <textarea rows="4" cols="30" name="description" id="description" class="description" maxlength="255" pattern="(?!.*\s\s)([^\s]{1,30})(\s[^\s]{1,20})*"></textarea>
                 <input type="submit" name="add_game" value="Add a game to a list" class="input">
                 <!-- Visar meddelande om en spel har lagts till i listan eller om åtgärd krävs -->
                 <?php if ($message): ?>

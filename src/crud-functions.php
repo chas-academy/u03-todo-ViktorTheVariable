@@ -4,10 +4,10 @@
 require_once 'db.php';
 
 // Funktion för att hämta användarens ID baserat på användarnamn
-function getUserId(PDO $conn, string $username): int
+function getUserId(PDO $pdo, string $username): int
 {
     // Förbereder SQL-frågan för att hämta userID från users-tabellen
-    $stmt = $conn->prepare('SELECT userID FROM users WHERE username = :username');
+    $stmt = $pdo->prepare('SELECT userID FROM users WHERE username = :username');
     // Binder parametern :username till variabeln $username
     $stmt->bindParam(':username', $username, PDO::PARAM_STR);
     // Utför frågan
@@ -20,21 +20,19 @@ function getUserId(PDO $conn, string $username): int
         return (int) $user['userID'];
     } else {
         // Om användaren inte finns, lägg till dem i databasen
-        $stmt = $conn->prepare('INSERT INTO users (username) VALUES (:username)');
+        $stmt = $pdo->prepare('INSERT INTO users (username) VALUES (:username)');
         $stmt->bindParam(':username', $username, PDO::PARAM_STR);
         $stmt->execute();
         // Returnerar det senaste insatta ID:t
-        return (int) $conn->lastInsertId();
+        return (int) $pdo->lastInsertId();
     }
 }
 
 // Funktion för att lägga till ett spel i databasen
-function addGame(PDO $conn, int $userId, string $title, string $description): void
+function addGame(PDO $pdo, int $userId, string $title, string $description): void
 {
-    // Kontrollerar att både titel och beskrivning är ifyllda
-    if (!empty($title) && !empty($description)) {
         // Förbereder SQL-frågan för att lägga till ett nytt spel
-        $stmt = $conn->prepare(
+        $stmt = $pdo->prepare(
             'INSERT INTO videoGames (title, description, userID) ' .
             'VALUES (:title, :description, :userId)'
         );
@@ -43,7 +41,6 @@ function addGame(PDO $conn, int $userId, string $title, string $description): vo
         $stmt->bindParam(':description', $description, PDO::PARAM_STR);
         $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
         $stmt->execute();
-    }
 }
 
 // Funktion för att hämta alla spel för en specifik användare
@@ -141,7 +138,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 // Hämtar det aktuella användarnamnet om ett namn har skickats med POST via en knapp annars sätter det till en tom sträng(false)
-$currentUsername = isset($_POST['username']) ? $_POST['username'] : '';
+$currentUsername = $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['username'])  ? $_POST['username'] : '';
 // Om användarnnamnet finns hämtas dess ID till $userId annars sätts det till 0(false)
 $userId = ($currentUsername) ? getUserId($conn, $currentUsername) : 0;
 // Om användarID finns och listan inte visas så hämtas listan med spel

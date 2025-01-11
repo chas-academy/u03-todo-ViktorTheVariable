@@ -82,7 +82,8 @@ th {
 }
 
 .game-cells {
-    max-width: 190px; /* Förhindrar att tabellen blir bredare än mobile-view */
+    max-width: 120px; /* Förhindrar att tabellen blir bredare än mobile-view */
+    word-break: break-all; 
 }
 
 footer {
