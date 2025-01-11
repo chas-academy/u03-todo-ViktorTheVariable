@@ -43,7 +43,7 @@ require_once 'crud-functions.php';
             </form>
             <!-- Visar en tabell när $showlist sätts till true via en knapptryckning -->
             <?php if ($showList): ?>
-                <a id="list-start" style="visibility: hidden;"></a>
+                <a id="list-start"></a>
                 <table class="flex" id="games-table">
                     <caption>My list of games</caption>
                     <!-- Visar alla spel i en tabell kopplat till en userID -->
@@ -80,7 +80,7 @@ require_once 'crud-functions.php';
                         <tr>
                             <td colspan="2">
                                 <!-- Visar eller döljer formuläret till uppdatering av spel efter knapptryckning -->
-                                <input type="checkbox" id="toggle-update-form-<?php echo htmlspecialchars($game["gameID"]); ?>" style="display:none;">
+                                <input type="checkbox" id="toggle-update-form-<?php echo htmlspecialchars($game["gameID"]); ?>">
                                 <label class="buttons change" for="toggle-update-form-<?php echo htmlspecialchars($game["gameID"]); ?>">Change</label>
                                 
                                 <!-- visar formuläret till uppdatering av rätt spel -->

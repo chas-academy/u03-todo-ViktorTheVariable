@@ -14,7 +14,7 @@
 
 img {
     width: 250px;
-    height: 70px; /* Justera detta värde efter behov */
+    height: 70px;
     object-fit: cover;
     object-position: center; /* Centrerar bilden vertikalt */
 }
@@ -91,4 +91,12 @@ footer {
 
 .description {
     resize: none;
+}
+
+a#list-start {
+    visibility: hidden;
+}
+
+input[type="checkbox"][id^="toggle-update-form-"] {
+    display: none;
 }
