@@ -1,5 +1,7 @@
 <?php
 
+
+session_start();
 // Inkluderar nödvändiga filer för databasanslutning och CRUD-operationer
 require_once 'db.php';
 require_once 'crud-functions.php';
@@ -32,13 +34,13 @@ require_once 'crud-functions.php';
                     <input type="text" name="username" id="username" class="input" required maxlength="40" value="<?php echo htmlspecialchars($currentUsername); ?>">
                     <label for="title" class="label">Type in the title of the game:</label>
                     <input type="text" name="title" id="title" class="input" maxlength="80">
+                    <?php if ($message): ?>
+                        <p class="input message"><?php echo htmlspecialchars($message); ?></p>
+                    <?php endif; ?>
                     <label for="description" class="label">Type in a game description:</label>
                     <textarea rows="4" cols="30" name="description" id="description" class="description" maxlength="255" pattern="(?!.*\s\s)([^\s]{1,30})(\s[^\s]{1,20})*"></textarea>
                     <input type="submit" name="add_game" value="Add a game to a list" class="input buttons black">
                     <!-- Visar meddelande om en spel har lagts till i listan eller om åtgärd krävs -->
-                    <?php if ($message): ?>
-                        <p class="input"><?php echo htmlspecialchars($message); ?></p>
-                    <?php endif; ?>
                     <input type='hidden' name='show_list' value='1'>
                     <input type='submit' value='Show your list of games!' class='input buttons black'>
                 </form>

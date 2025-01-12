@@ -31,16 +31,16 @@ function getUserId(PDO $pdo, string $username): int
 // Funktion för att lägga till ett spel i databasen
 function addGame(PDO $pdo, int $userId, string $title, string $description): void
 {
-        // Förbereder SQL-frågan för att lägga till ett nytt spel
-        $stmt = $pdo->prepare(
-            'INSERT INTO videoGames (title, description, userID) ' .
-            'VALUES (:title, :description, :userId)'
-        );
+    // Förbereder SQL-frågan för att lägga till ett nytt spel
+    $stmt = $pdo->prepare(
+        'INSERT INTO videoGames (title, description, userID) ' .
+        'VALUES (:title, :description, :userId)'
+    );
         // Binder parametrarna till variablerna
-        $stmt->bindParam(':title', $title, PDO::PARAM_STR);
-        $stmt->bindParam(':description', $description, PDO::PARAM_STR);
-        $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
-        $stmt->execute();
+    $stmt->bindParam(':title', $title, PDO::PARAM_STR);
+    $stmt->bindParam(':description', $description, PDO::PARAM_STR);
+    $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
+    $stmt->execute();
 }
 
 // Funktion för att hämta alla spel för en specifik användare
@@ -100,8 +100,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $userId = getUserId($conn, $_POST['username']);
             // Lägger till spelet i databasen genom funktionen
             addGame($conn, $userId, $_POST['title'], $_POST['description']);
-            // Sätter meddelandet om att spelet har lagts till framgångsrikt
-            $message = 'Game added successfully';
+            // Sparar användarnamnet från formuläret i sessionen så att det kan användas senare
+            $_SESSION['currentUsername'] = $_POST['username'];
+            // Omdirigerar användaren tillbaka till samma sida för att förhindra dubbelt inlägg av spel
+            header("Location: " . $_SERVER['PHP_SELF']);
+            // Avslutar scriptet för att säkerställa att ingen ytterligare kod körs efter omdirigeringen
+            exit();
         } else {
             // Meddelande om att fälten måste fyllas i korrekt
             $message = 'Please fill in both title and description fields';
@@ -137,10 +141,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// Hämtar det aktuella användarnamnet om ett namn har skickats med POST via en knapp annars sätter det till en tom sträng(false)
-$currentUsername = $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['username'])  ? $_POST['username'] : '';
-// Om användarnnamnet finns hämtas dess ID till $userId annars sätts det till 0(false)
+// Sätter $currentUsername till sessionens namn om det finns, annars till användarens inmatning i formuläret.
+$currentUsername = isset($_SESSION['currentUsername']) ? $_SESSION['currentUsername'] 
+    : (isset($_POST['username']) ? $_POST['username'] : '');
+// Hämtar användarens ID om $currentUsername är angivet; annars sätts $userId till 0.
 $userId = ($currentUsername) ? getUserId($conn, $currentUsername) : 0;
-// Om användarID finns och listan inte visas så hämtas listan med spel
+// Om $userId är giltigt och listan inte visas, returneras en tom lista; annars hämtas användarens spel.
 $games = ($userId && !$showList) ? [] : ($userId ? getGames($conn, $userId) : []);
 

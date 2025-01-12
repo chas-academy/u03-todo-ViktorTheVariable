@@ -25,6 +25,10 @@ img {
     margin-bottom: 2rem;
 }
 
+.message {
+    color: red;
+}
+
 /* Alla knappar */
 .buttons {
     padding: 0.2rem 25px;
