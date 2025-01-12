@@ -120,8 +120,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         updateGames(
             $conn,
             (int) $_POST['game_id'],
-            $_POST['title'],
-            $_POST['description'],
+            $_POST['new_title'],
+            $_POST['new_description'],
             isset($_POST['is_completed'])
         );
         $showList = true;

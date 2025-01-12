@@ -1,5 +1,6 @@
 <?php
 
+// Inkluderar nödvändiga filer för databasanslutning och CRUD-operationer
 require_once 'db.php';
 require_once 'crud-functions.php';
 
@@ -14,7 +15,7 @@ require_once 'crud-functions.php';
     <meta name="description" content="U03-todo">
     <meta name="keywords" content="U03-todo, MariaDB, PDO, Videogames">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Video Games ToDo</title>
     <link type="text/css" rel="stylesheet" href="style/style.css">
 </head>
 <body>
@@ -30,16 +31,16 @@ require_once 'crud-functions.php';
                 <label for="username" class="label">Type in your username:</label>
                 <input type="text" name="username" id="username" class="input" required maxlength="40" value="<?php echo htmlspecialchars($currentUsername); ?>">
                 <label for="title" class="label">Type in the title of the game:</label>
-                <input type="text" name="title" id="title" class="input" maxlength="80" pattern="(?!.*\s\s)([^\s]{1,30})(\s[^\s]{1,20})*">
+                <input type="text" name="title" id="title" class="input" maxlength="80">
                 <label for="description" class="label">Type in a game description:</label>
                 <textarea rows="4" cols="30" name="description" id="description" class="description" maxlength="255" pattern="(?!.*\s\s)([^\s]{1,30})(\s[^\s]{1,20})*"></textarea>
-                <input type="submit" name="add_game" value="Add a game to a list" class="input">
+                <input type="submit" name="add_game" value="Add a game to a list" class="input buttons black">
                 <!-- Visar meddelande om en spel har lagts till i listan eller om åtgärd krävs -->
                 <?php if ($message): ?>
                     <p class="input"><?php echo htmlspecialchars($message); ?></p>
                 <?php endif; ?>
                 <input type='hidden' name='show_list' value='1'>
-                <input type='submit' value='Show your list of games!' class='input'>
+                <input type='submit' value='Show your list of games!' class='input buttons black'>
             </form>
             <!-- Visar en tabell när $showlist sätts till true via en knapptryckning -->
             <?php if ($showList): ?>
@@ -89,9 +90,9 @@ require_once 'crud-functions.php';
                                         <input type='hidden' name='username' value='<?php echo htmlspecialchars($currentUsername); ?>'>
                                         <input type='hidden' name='game_id' value='<?php echo htmlspecialchars($game["gameID"]); ?>'>
                                         <label for='new_title'>New Title:</label><br>
-                                        <input type='text' name='title' maxlength='80' required><br>
+                                        <input type='text' name='new_title' maxlength='80' required><br>
                                         <label for='new_description'>New Description:</label><br>
-                                        <textarea rows="4" cols="30" name="description" class="description" maxlength="255" required></textarea><br>
+                                        <textarea rows="4" cols="30" name="new_description" class="description" maxlength="255" required></textarea><br>
                                         <input class='buttons update-game' type='submit' name='update_game' value='Update Game'>
                                     </form>
                                 </div>

@@ -12,6 +12,7 @@
     width: 100%;
 }
 
+/* för bilden i header */
 img {
     width: 250px;
     height: 70px;
@@ -19,20 +20,16 @@ img {
     object-position: center; /* Centrerar bilden vertikalt */
 }
 
+/* för input-fälten och 2 översta knapparna */
 .input {
     margin-bottom: 2rem;
 }
 
-/* Visar update-formuläret när tillhörande checkbox är markerad */
-input[type="checkbox"]:checked + label + div {
-    display: block;
-}
-
-/* Båda pekara till update-formuläret */
-
-/* Döljer update-formuläret som standard */
-div.update-form {
-    display: none;
+/* Alla knappar */
+.buttons {
+    padding: 0.2rem 25px;
+    border-radius: 0.5rem;
+    cursor: pointer;
 }
 
 table {
@@ -55,49 +52,72 @@ th {
     border: 1px solid white;
 }
 
-.buttons {
-    padding: 0.2rem 25px;
-    border-radius: 0.5rem;
-    cursor: pointer;
+/* ser till att tabellen håller mobile-view och ord bryts vid max-width */
+.game-cells {
+    max-width: 120px; /* Förhindrar att tabellen blir bredare än mobile-view */
+    word-break: break-word
 }
 
-.change {
-    background-color: #f9f506;
-    border: 1px solid black;
-}
-
-.update-game {
-    background-color: #5ff32e;
-    margin-top: 0.3rem;
-}
-
-.delete {
-    background-color: #d51414;
+/* 2 översta knapparna */
+.black {
+    background-color: black;
     color: #eee;
+    margin-top: 0.5rem;
 }
 
+/* save knappen */
 .save {
     padding: 0.1rem 10px;
     background-color: #5ff32e;
 }
 
-.game-cells {
-    max-width: 120px; /* Förhindrar att tabellen blir bredare än mobile-view */
-    word-break: break-all; 
+/* change labeln */
+.change {
+    background-color: #f9f506;
+    border: 1px solid black;
+}
+
+/* Visar update-formuläret när tillhörande checkbox trycks på */
+input[type="checkbox"]:checked + label + div {
+    display: block;
+}
+
+/* Både ovan och nedan pekara till update-formuläret */
+
+/* Döljer update-formuläret som standard */
+div.update-form {
+    display: none;
+}
+
+/* döljer checkbox som togglar update-formuläret */
+input[type="checkbox"][id^="toggle-update-form-"] {
+    display: none;
+}
+
+/* update-game knappen */
+.update-game {
+    background-color: #5ff32e;
+    margin-top: 0.3rem;
+}
+
+/* delete knappen */
+.delete {
+    background-color: #d51414;
+    color: #eee;
+}
+
+/* båda textarea fälten  */
+.description {
+    resize: none;
+    margin-bottom: 1rem;
+}
+
+/* döljer ankaret aom tar användare till början av listan */
+a#list-start {
+    visibility: hidden;
 }
 
 footer {
     margin: 2rem 0 1rem;
 }
 
-.description {
-    resize: none;
-}
-
-a#list-start {
-    visibility: hidden;
-}
-
-input[type="checkbox"][id^="toggle-update-form-"] {
-    display: none;
-}
