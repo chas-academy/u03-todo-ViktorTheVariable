@@ -1,0 +1,127 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.flex {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+/* för bilden i header */
+img {
+    width: 250px;
+    height: 70px;
+    object-fit: cover;
+    object-position: center; /* Centrerar bilden vertikalt */
+}
+
+/* för input-fälten och 2 översta knapparna */
+.input {
+    margin-bottom: 2rem;
+}
+
+.message {
+    color: red;
+}
+
+/* Alla knappar */
+.buttons {
+    padding: 0.2rem 25px;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+td {
+    border: 1px solid black;
+    padding: 5px;
+}
+
+tr {
+    text-align: center;
+}
+
+th {
+    background-color: #0e0f0d;
+    color: #eee;
+    padding: 5px;
+    border: 1px solid white;
+}
+
+/* ser till att tabellen håller mobile-view och ord bryts vid max-width */
+.game-cells {
+    max-width: 120px; /* Förhindrar att tabellen blir bredare än mobile-view */
+    word-break: break-word
+}
+
+/* 2 översta knapparna */
+.black {
+    background-color: black;
+    color: #eee;
+    margin-top: 0.5rem;
+}
+
+/* save knappen */
+.save {
+    padding: 0.1rem 10px;
+    background-color: #5ff32e;
+}
+
+/* change labeln */
+.change {
+    background-color: #f9f506;
+    border: 1px solid black;
+}
+
+/* Visar update-formuläret när tillhörande checkbox trycks på */
+input[type="checkbox"]:checked + label + div {
+    display: block;
+}
+
+/* Både ovan och nedan pekara till update-formuläret */
+
+/* Döljer update-formuläret som standard */
+div.update-form {
+    display: none;
+}
+
+/* döljer checkbox som togglar update-formuläret */
+input[type="checkbox"][id^="toggle-update-form-"] {
+    display: none;
+}
+
+/* update-game knappen */
+.update-game {
+    background-color: #5ff32e;
+    margin-top: 0.3rem;
+}
+
+/* delete knappen */
+.delete {
+    background-color: #d51414;
+    color: #eee;
+}
+
+/* båda textarea fälten  */
+.description {
+    resize: none;
+    margin-bottom: 1rem;
+}
+
+/* döljer ankaret aom tar användare till början av listan */
+a#list-start {
+    visibility: hidden;
+}
+
+footer {
+    margin: 2rem 0 1rem;
+}
+
