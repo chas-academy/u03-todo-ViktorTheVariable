@@ -107,6 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Avslutar scriptet för att säkerställa att ingen ytterligare kod körs efter omdirigeringen
             exit();
         } else {
+            $_SESSION['currentUsername'] = $_POST['username'];
             // Meddelande om att fälten måste fyllas i korrekt
             $message = 'Please fill in both title and description fields';
         }
